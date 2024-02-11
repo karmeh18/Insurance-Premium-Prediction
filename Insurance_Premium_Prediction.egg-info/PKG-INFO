@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: Insurance-Premium-Prediction
+Version: 0.0.0.1
+Author: Karan Mehta
+Author-email: kmehta883@gmail.com
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: setuptools
+Requires-Dist: matplotlib
+Requires-Dist: Flask
+Requires-Dist: seaborn
+Requires-Dist: category_encoders

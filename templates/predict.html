@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Premium Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-text {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+
+        span {
+            font-weight: bold;
+        }
+
+        span.result {
+            color: rgba(248, 5, 17, 0.76);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h1>Insurance Premium Price Prediction</h1>
+        <!-- Age -->
+        <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input class="form-control" type="number" name="age" placeholder="Enter Age" required />
+            <small class="form-text text-muted">
+                <strong>The age should be in between 18 to 65 years.</strong>
+            </small>
+        </div>
+        <!-- Gender -->
+        <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-control" name="gender" required>
+                <option class="placeholder" selected disabled value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <!-- Smoker -->
+        <div class="mb-3">
+            <label class="form-label">Smoker</label>
+            <select class="form-control" name="smoker" required>
+                <option class="placeholder" selected disabled value="">Select Smoker</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <!-- Region -->
+        <div class="mb-3">
+            <label class="form-label">Region</label>
+            <select class="form-control" name="region" required>
+                <option class="placeholder" selected disabled value="">Select Region</option>
+                <option value="southeast">Southeast</option>
+                <option value="northwest">Northwest</option>
+                <option value="southwest">Southwest</option>
+                <option value="northeast">Northeast</option>
+            </select>
+        </div>
+        <!-- Medical History -->
+        <div class="mb-3">
+            <label class="form-label">Medical History</label>
+            <select class="form-control" name="medical_history" required>
+                <option class="placeholder" selected disabled value="">Select Medical History</option>
+                <option value="Diabetes">Diabetes</option>
+                <option value="None">None</option>
+                <option value="High blood pressure">High blood pressure</option>
+                <option value="Heart disease">Heart disease</option>
+            </select>
+        </div>
+        <!-- Family Medical History -->
+        <div class="mb-3">
+            <label class="form-label">Family Medical History</label>
+            <select class="form-control" name="family_medical_history" required>
+                <option class="placeholder" selected disabled value="">Select Family Medical History</option>
+                <option value="None">None</option>
+                <option value="High blood pressure">High blood pressure</option>
+                <option value="Diabetes">Diabetes</option>
+                <option value="Heart disease">Heart disease</option>
+            </select>
+        </div>
+        <!-- Exercise Frequency -->
+        <div class="mb-3">
+            <label class="form-label">Exercise Frequency</label>
+            <select class="form-control" name="exercise_frequency" required>
+                <option class="placeholder" selected disabled value="">Select Exercise Frequency</option>
+                <option value="Never">Never</option>
+                <option value="Occasionally">Occasionally</option>
+                <option value="Rarely">Rarely</option>
+                <option value="Frequently">Frequently</option>
+            </select>
+        </div>
+        <!-- Occupation -->
+        <div class="mb-3">
+            <label class="form-label">Occupation</label>
+            <select class="form-control" name="occupation" required>
+                <option class="placeholder" selected disabled value="">Select Occupation</option>
+                <option value="Blue collar">Blue collar</option>
+                <option value="White collar">White collar</option>
+                <option value="Student">Student</option>
+                <option value="Unemployed">Unemployed</option>
+            </select>
+        </div>
+        <!-- Coverage Level -->
+        <div class="mb-3">
+            <label class="form-label">Coverage Level</label>
+            <select class="form-control" name="coverage_level" required>
+                <option class="placeholder" selected disabled value="">Select Coverage Level</option>
+                <option value="Premium">Premium</option>
+                <option value="Standard">Standard</option>
+                <option value="Basic">Basic</option>
+            </select>
+        </div>
+        <!-- BMI -->
+        <div class="mb-3">
+            <label class="form-label">BMI</label>
+            <input class="form-control" type="number" step="0.01" name="bmi" placeholder="Enter BMI" required />
+            <small class="form-text text-muted">
+                <strong>The BMI should be in the range of 18.0 to 50.0.</strong>
+            </small>
+        </div>
+        <!-- Children -->
+        <div class="mb-3">
+            <label class="form-label">Children</label>
+            <select class="form-control" name="children" required>
+                <option class="placeholder" selected disabled value="">Select Number of Children</option>
+                <option value="5">5</option>
+                <option value="2">2</option>
+                <option value="0">0</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="1">1</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict" required />
+        </div>
+    </form>
+    <h2>
+        The prediction for insurance premium is :
+        <span style="color: blue;">{{results}}</span>
+    </h2>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+[ 2024-02-06 04:39:59,029 ] data_ingestion.py 14 root - INFO - Data Ingestion has been initiated
+[ 2024-02-06 04:40:00,964 ] data_ingestion.py 17 root - INFO - Data has been imported
+[ 2024-02-06 04:40:07,898 ] data_ingestion.py 21 root - INFO - Raw Data directory has been created and a csv file has been exported to the path 'artifacts\data.csv'
+[ 2024-02-06 04:40:09,616 ] data_transformation.py 68 root - INFO - Data has been splitted in
+[ 2024-02-06 04:40:10,132 ] data_transformation.py 70 root - INFO - Exporting Training data and test data
+[ 2024-02-06 04:40:16,979 ] data_transformation.py 76 root - INFO - Applying preprocess object to Training and Testing Data
+[ 2024-02-06 04:40:16,979 ] data_transformation.py 41 root - INFO - Numerical pipeline has been created for the columns ['age', 'bmi', 'children']
+[ 2024-02-06 04:40:16,994 ] data_transformation.py 48 root - INFO - Categorical pipeline has been created for the columns ['gender', 'smoker', 'region', 'medical_history', 'family_medical_history', 'exercise_frequency', 'occupation', 'coverage_level']
+[ 2024-02-06 04:40:24,653 ] data_transformation.py 82 root - INFO - Applied preprocesor object to training and test data
+[ 2024-02-06 04:40:24,653 ] data_transformation.py 84 root - INFO - Combining preprocessed data output, Input variables and target variable in both training and test data
+[ 2024-02-06 04:40:24,668 ] data_transformation.py 88 root - INFO - Data points have been preprocessed and combined in both testing and training data points
+[ 2024-02-06 04:40:24,762 ] model_trainer.py 16 root - INFO - Model Trainer class has been initiated
+[ 2024-02-06 04:40:24,762 ] model_trainer.py 22 root - INFO - Linear Regression has been initiated
+[ 2024-02-06 04:40:25,014 ] model_trainer.py 26 root - INFO - Model Training has been completed and the accuracy is 0.8317490963637104
